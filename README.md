@@ -1,2 +1,2 @@
 # acmf-api
-api for acmr
+api for acmf
