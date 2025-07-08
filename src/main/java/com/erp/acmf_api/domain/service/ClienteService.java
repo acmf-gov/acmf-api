@@ -4,13 +4,11 @@ import com.erp.acmf_api.controller.dto.*;
 import com.erp.acmf_api.domain.entity.*;
 import com.erp.acmf_api.domain.enuns.ModalidadePedido;
 import com.erp.acmf_api.domain.enuns.StatusPagamento;
-import com.erp.acmf_api.domain.enuns.TipoLancamento;
 import com.erp.acmf_api.domain.exception.BusinessException;
 import com.erp.acmf_api.domain.repository.*;
 import com.erp.acmf_api.domain.service.mapper.ClienteMapper;
 import com.erp.acmf_api.domain.service.mapper.ProdutoMapper;
 import com.erp.acmf_api.domain.util.TelefoneUtil;
-import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -50,7 +48,7 @@ public class ClienteService {
 
 
     @Transactional
-    public ClienteResponseDto cadastrarCliente(CadastroClienteRequestDto request) {
+    public ClienteConsultaDto cadastrarCliente(CadastroClienteRequestDto request) {
 
         if (clienteRepository.findByTelefone(TelefoneUtil.desformatarTelefone(request.getTelefone())) != null) {
             throw new BusinessException("Cliente com esse telefone já cadastrado.");
@@ -96,17 +94,17 @@ public class ClienteService {
         }
     }
 
-    public List<ClienteResponseDto> consultarTodosClientes(){
+    public List<ClienteConsultaDto> consultarTodosClientes(){
         try {
 
-            List<ClienteResponseDto> listaRetorno = new ArrayList<>();
+            List<ClienteConsultaDto> listaRetorno = new ArrayList<>();
 
             log.info("Listando todos os clientes cadastrados no sistema.");
             List<Cliente> todosOsClientes = clienteRepository.findAll();
             log.info("{} clientes encontrados", todosOsClientes.size());
 
             for (Cliente cliente : todosOsClientes) {
-                ClienteResponseDto clienteDto = new ClienteResponseDto();
+                ClienteConsultaDto clienteDto = new ClienteConsultaDto();
                 clienteDto.setId(cliente.getId());
                 clienteDto.setNome(cliente.getNome());
                 clienteDto.setEndereco(ClienteMapper.getEnderecoCompleto(cliente));

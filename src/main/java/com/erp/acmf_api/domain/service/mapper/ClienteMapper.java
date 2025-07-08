@@ -1,15 +1,15 @@
 package com.erp.acmf_api.domain.service.mapper;
 
 
-import com.erp.acmf_api.controller.dto.ClienteResponseDto;
+import com.erp.acmf_api.controller.dto.ClienteConsultaDto;
 import com.erp.acmf_api.domain.entity.Cliente;
 import com.erp.acmf_api.domain.entity.Endereco;
 import org.springframework.stereotype.Component;
 
 @Component
 public class ClienteMapper {
-    public static ClienteResponseDto toResponse(Cliente cliente) {
-        ClienteResponseDto response = new ClienteResponseDto();
+    public static ClienteConsultaDto toResponse(Cliente cliente) {
+        ClienteConsultaDto response = new ClienteConsultaDto();
         response.setId(cliente.getId());
         response.setNome(cliente.getNome());
         response.setTelefone(cliente.getTelefone());

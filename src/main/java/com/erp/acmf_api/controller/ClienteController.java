@@ -22,7 +22,7 @@ public class ClienteController {
     public ResponseEntity<?> cadastrarCliente(@RequestBody CadastroClienteRequestDto request) {
 
         try {
-            ClienteResponseDto response = clienteService.cadastrarCliente(request);
+            ClienteConsultaDto response = clienteService.cadastrarCliente(request);
             return new ResponseEntity<>(response, HttpStatus.CREATED);
         }catch (BusinessException e){
             return ResponseEntity.unprocessableEntity().body(e.getMessage());

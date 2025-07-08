@@ -104,7 +104,7 @@ public class AdministradorController {
     @GetMapping("/consultar-todos-clientes")
     public ResponseEntity<?> consultarTodosClientes() {
         try {
-            List<ClienteResponseDto> clientes = clienteService.consultarTodosClientes();
+            List<ClienteConsultaDto> clientes = clienteService.consultarTodosClientes();
             if (clientes.isEmpty()){
                 return ResponseEntity.ok().body("Não há nenhum cliente cadastrado.");
             }
@@ -124,6 +124,15 @@ public class AdministradorController {
             return ResponseEntity.ok(cliente);
         } catch (BusinessException e) {
             return ResponseEntity.unprocessableEntity().body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/valida-cliente/{numeroTelefone}")
+    public ResponseEntity<Boolean> validaClientePorNumero(@PathVariable String numeroTelefone) {
+        try {
+            return ResponseEntity.ok(administradorService.validaClientePorNumero(numeroTelefone));
+        } catch (BusinessException e) {
+            return ResponseEntity.internalServerError().body(null);
         }
     }
 

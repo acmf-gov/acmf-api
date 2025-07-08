@@ -1,13 +1,12 @@
 package com.erp.acmf_api.domain.service;
 
-import com.erp.acmf_api.controller.dto.PacotesConsultaDto;
-import com.erp.acmf_api.controller.dto.PrecoProntoEntregaConsultaDto;
-import com.erp.acmf_api.controller.dto.PrecoProntoEntregaDto;
-import com.erp.acmf_api.controller.dto.ProdutoCadastroDto;
+import com.erp.acmf_api.controller.dto.*;
+import com.erp.acmf_api.domain.entity.Cliente;
 import com.erp.acmf_api.domain.entity.Pacotes;
 import com.erp.acmf_api.domain.entity.PrecoProntoEntrega;
 import com.erp.acmf_api.domain.entity.Produto;
 import com.erp.acmf_api.domain.exception.BusinessException;
+import com.erp.acmf_api.domain.repository.ClienteRepository;
 import com.erp.acmf_api.domain.repository.PacotesRepository;
 import com.erp.acmf_api.domain.repository.PrecoProntoEntregaRepository;
 import com.erp.acmf_api.domain.repository.ProdutoRepository;
@@ -31,6 +30,9 @@ public class AdministradorService {
 
     @Autowired
     private PrecoProntoEntregaRepository precoProntoEntregaRepository;
+
+    @Autowired
+    private ClienteRepository clienteRepository;
 
     @Autowired
     private PacotesRepository pacotesRepository;
@@ -118,6 +120,23 @@ public class AdministradorService {
 
         } catch (Exception e) {
             log.error("Erro ao adicionar produto: {}", e.getMessage());
+            throw new BusinessException(e.getMessage());
+        }
+    }
+
+    public boolean validaClientePorNumero(String numeroTelefone){
+        try {
+
+            log.info("Consultando se {} é um cliente cadastrado", numeroTelefone);
+            Cliente cliente = clienteRepository.findByTelefone(numeroTelefone);
+            if(cliente != null){
+                log.info("Cliente encontrado!");
+                return true;
+            }
+            return false;
+
+        }catch (Exception e) {
+            log.error("Erro ao validar se cliente é cadastrado ou não pelo numero de telefone recebido: {}", e.getMessage());
             throw new BusinessException(e.getMessage());
         }
     }

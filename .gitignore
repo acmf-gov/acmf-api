@@ -1,0 +1,19 @@
+# Compilado
+/target/
+
+# Arquivos do IntelliJ
+/.idea/
+/.iml
+/.classpath
+/.project
+/.settings/
+/.metadata/
+
+# Logs e arquivos temporários
+*.log
+*.tmp
+*/build/
+
+# Arquivos do sistema operacional
+.DS_Store
+Thumbs.db

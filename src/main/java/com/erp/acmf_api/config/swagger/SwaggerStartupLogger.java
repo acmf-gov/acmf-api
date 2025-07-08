@@ -1,4 +1,4 @@
-package com.erp.acmf_api.config;
+package com.erp.acmf_api.config.swagger;
 
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
