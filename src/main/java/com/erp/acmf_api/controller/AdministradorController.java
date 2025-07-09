@@ -30,7 +30,7 @@ public class AdministradorController {
         try {
             administradorService.adicionarProduto(dto);
             return ResponseEntity.status(HttpStatus.CREATED).body("Produto salvo com sucesso.");
-        } catch (BusinessException e) {
+        } catch (Exception e) {
             return ResponseEntity.internalServerError().body(e.getMessage());
         }
     }
@@ -40,7 +40,7 @@ public class AdministradorController {
         try {
             administradorService.removerProduto(idProduto);
             return ResponseEntity.status(HttpStatus.OK).body("Produto removido com sucesso.");
-        } catch (BusinessException e) {
+        } catch (Exception e) {
             return ResponseEntity.internalServerError().body(e.getMessage());
         }
     }
@@ -50,7 +50,7 @@ public class AdministradorController {
         try {
             administradorService.removerPrecoProntoEntrega(idPreco);
             return ResponseEntity.status(HttpStatus.OK).body("Produto removido com sucesso.");
-        } catch (BusinessException e) {
+        } catch (Exception e) {
             return ResponseEntity.internalServerError().body(e.getMessage());
         }
     }
@@ -60,7 +60,7 @@ public class AdministradorController {
         try {
             administradorService.atualizarProduto(id, dto);
             return ResponseEntity.status(HttpStatus.OK).body("Produto atualizado com sucesso.");
-        } catch (BusinessException e) {
+        } catch (Exception e) {
             return ResponseEntity.internalServerError().body(e.getMessage());
         }
     }
@@ -70,7 +70,7 @@ public class AdministradorController {
         try {
             administradorService.adicionarPrecoProntoEntrega(dto);
             return ResponseEntity.status(HttpStatus.CREATED).body("Preço salvo com sucesso.");
-        } catch (BusinessException e) {
+        } catch (Exception e) {
             return ResponseEntity.internalServerError().body(e.getMessage());
         }
     }
@@ -83,7 +83,7 @@ public class AdministradorController {
                 return ResponseEntity.ok().body("Não há tabela de preço a pronta entrega para esse produto.");
             }
             return ResponseEntity.ok(Collections.singletonList(tabela));
-        } catch (BusinessException e) {
+        } catch (Exception e) {
             return ResponseEntity.unprocessableEntity().body(e.getMessage());
         }
     }
@@ -96,7 +96,7 @@ public class AdministradorController {
                 return ResponseEntity.ok().body("Não há nenhum pacote vigente no momento.");
             }
             return ResponseEntity.ok(Collections.singletonList(pacotes));
-        } catch (BusinessException e) {
+        } catch (Exception e) {
             return ResponseEntity.unprocessableEntity().body(e.getMessage());
         }
     }
@@ -109,7 +109,7 @@ public class AdministradorController {
                 return ResponseEntity.ok().body("Não há nenhum cliente cadastrado.");
             }
             return ResponseEntity.ok(Collections.singletonList(clientes));
-        } catch (BusinessException e) {
+        } catch (Exception e) {
             return ResponseEntity.unprocessableEntity().body(e.getMessage());
         }
     }
@@ -131,7 +131,7 @@ public class AdministradorController {
     public ResponseEntity<Boolean> validaClientePorNumero(@PathVariable String numeroTelefone) {
         try {
             return ResponseEntity.ok(administradorService.validaClientePorNumero(numeroTelefone));
-        } catch (BusinessException e) {
+        } catch (Exception e) {
             return ResponseEntity.internalServerError().body(null);
         }
     }

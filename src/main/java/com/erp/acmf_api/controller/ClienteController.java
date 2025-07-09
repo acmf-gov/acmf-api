@@ -24,7 +24,7 @@ public class ClienteController {
         try {
             ClienteConsultaDto response = clienteService.cadastrarCliente(request);
             return new ResponseEntity<>(response, HttpStatus.CREATED);
-        }catch (BusinessException e){
+        }catch (Exception e){
             return ResponseEntity.unprocessableEntity().body(e.getMessage());
         }
     }
@@ -41,7 +41,7 @@ public class ClienteController {
 
             return ResponseEntity.ok(Collections.singletonList(produtos));
 
-        }catch (BusinessException e){
+        }catch (Exception e){
             return ResponseEntity.internalServerError().body(Collections.singletonList(e.getMessage()));
         }
     }
@@ -53,7 +53,7 @@ public class ClienteController {
             MeusPedidosDto meusPedidos = clienteService.consultarMeusPedidos(numeroTelefone);
             return ResponseEntity.ok(meusPedidos);
 
-        }catch (BusinessException e){
+        }catch (Exception e){
             return ResponseEntity.internalServerError().body(Collections.singletonList(e.getMessage()));
         }
     }
@@ -65,7 +65,7 @@ public class ClienteController {
                 return ResponseEntity.status(HttpStatus.CREATED).body("Pedido realizado com sucesso.");
             }
             return ResponseEntity.unprocessableEntity().body("Houve algum erro durante o pedido..");
-        } catch (BusinessException e) {
+        } catch (Exception e) {
             return ResponseEntity.internalServerError().body(e.getMessage());
         }
     }
@@ -75,7 +75,7 @@ public class ClienteController {
         try {
             clienteService.cancelarPedido(idPedido, numeroTelefone);
             return ResponseEntity.status(HttpStatus.OK).body("Pedido cancelado com sucesso.");
-        } catch (BusinessException e) {
+        } catch (Exception e) {
             return ResponseEntity.unprocessableEntity().body(e.getMessage());
         }
     }
